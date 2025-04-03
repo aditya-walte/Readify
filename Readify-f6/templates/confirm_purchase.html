@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Purchase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='pngtree-all-the-old-books-on-the-shelves-in-a-library-picture-image_2496728.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .confirm-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qr-code {
+            width: 80%;
+            max-width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="confirm-container">
+    <h2>Confirm Your Purchase</h2>
+
+    {% if payment_method == "PhonePe" %}
+        <p>Scan the QR code below to complete your payment:</p>
+        <div class="qr-container">
+            <img src="{{ url_for('static', filename='payment_QR_code.jpg') }}" alt="PhonePe QR Code" class="qr-code">
+            <form method="POST">
+                <button type="submit">Confirm Payment</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Pay on delivery is selected. Click below to confirm.</p>
+        <form method="POST">
+            <button type="submit">Confirm Order</button>
+        </form>
+    {% endif %}
+</div>
+
+</body>
+</html>

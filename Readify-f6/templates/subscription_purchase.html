@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Purchase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ url_for('static', filename='pngtree-all-the-old-books-on-the-shelves-in-a-library-picture-image_2496728.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        /* Subscription Details */
+        .subscription-details {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .subscription-details h2 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .subscription-details h3 {
+            color: #007bff;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        /* Subscription Plans */
+        .subscription-plans {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .plan-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            text-align: left;
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .features li {
+            font-size: 16px;
+            margin: 5px 0;
+            list-style: none;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✔";
+            position: absolute;
+            left: -20px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .subscribe-btn {
+            display: block;
+            width: 100%;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 0;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .subscribe-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Payment Methods */
+        .payment-options {
+            margin-top: 30px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .payment_method {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .payment_method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment_method img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .payment_method h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .payment_method p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .payment_button {
+            display: inline-block;
+            width: 100%;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 0;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .payment_button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Subscription Purchase</h1>
+    </header>
+
+    <div class="container">
+        <section class="subscription-details">
+            <h2>{{ subscription_name }}</h2>
+            <p>{{ subscription_description }}</p>
+            <h3>Price: ₹{{ subscription_price }}</h3>
+        </section>
+
+        <section class="payment-options">
+            <h2>Select Payment Method</h2>
+            <div class="payment-methods">
+                <!-- PhonePe Payment -->
+                <div class="payment_method">
+                    <img src="{{ url_for('static', filename='pngwing.com.png') }}" alt="PhonePe">
+                    <h3>PhonePe</h3>
+                    <p>Scan the QR code and pay securely.</p>
+                    <a href="{{ url_for('phonepe_payment') }}" class="payment_button">Pay with PhonePe</a>
+                </div>
+
+                <!-- Cash on Delivery -->
+                <div class="payment_method">
+                    <img src="{{ url_for('static', filename='cash.png') }}" alt="Add Bank">
+                    <h3>Add_Bank</h3>
+                    <p>Pay when you receive the order.</p>
+                    <a href="{{ url_for('Add_Bank') }}" class="payment_button">Choose COD</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

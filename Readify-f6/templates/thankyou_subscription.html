@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Confirmed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Thank You!</h1>
+    </header>
+    
+    <section class="confirmation">
+        <h2>Your Subscription is Confirmed!</h2>
+        <p>You have successfully subscribed to the <strong>{{ subscription_name }}</strong>.</p>
+        <p>Payment Method: <strong>{{ payment_method }}</strong></p>
+        <p>Enjoy your benefits!</p>
+    </section>
+
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ url_for('home') }}";
+        }, 5000);
+    </script>
+</body>
+</html>

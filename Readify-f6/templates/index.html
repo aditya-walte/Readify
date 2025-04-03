@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Bookstore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<script>
+    function toggleSettingsPopup() {
+        var popup = document.getElementById("settings-popup");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+        } else {
+            popup.style.display = "block";
+        }
+    }
+    </script>
+    
+<body>
+    <header>
+        <div class="header-container">
+            <!-- Knowledge Zone & Logo -->
+            <div class="logo-section">
+                <!--<h1 class="site-name">Readify</h1>-->
+                <img src="../static/logo-removebg-preview.png" alt="Logo" class="logo">
+            </div>
+            
+            <!-- Search Bar -->
+            <form action="{{ url_for('home') }}" method="GET" class="search-form">
+                <input type="text" name="search" placeholder="Search for books..." required>
+                <button type="submit">Search</button>
+            </form>
+
+            <!-- Cart Icon -->
+            <div class="cart-section">
+                <a href="{{ url_for('cart') }}">
+                    <img src="../static/png3.png" alt="Cart" class="cart-icon">
+                </a>
+                <p><a href="{{ url_for('cart') }}">View Cart ({{ cart_count }})</a></p>
+            </div>
+            
+            <!-- User Info or Login/Signup -->
+            <div class="user-info">
+                {% if 'user_id' in session %}
+                    <a href="{{ url_for('profile') }}">
+                        <img src="{{ url_for('static', filename='user.png') }}" alt="User Profile" class="user-icon">
+                    </a>
+                    <p>{{ username }}</p>
+                    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+                {% else %}
+                    <div class="login-container">
+                        <form action="{{ url_for('login') }}" method="POST">
+                            <button type="submit" class="submit-btn">Login</button>
+                        </form>
+                        <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a></p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- New Message Container -->
+    <div class="message-container">
+        <marquee behavior="scroll" direction="left">
+            Hello! Welcome to a world of endless knowledge. Explore our selection of products and services crafted to enrich your life with knowledge. Wanna know about us? <a href="{{ url_for('about_us') }}" class="about-link">Click here</a>.
+        </marquee>
+    </div>
+
+    <!-- Split Screen for Categories and Books -->
+    <div class="split-screen">
+        <!-- Categories Section -->
+        <div class="categories">
+            <h3>Categories</h3>
+            <ul>
+                <li><a href="{{ url_for('home') }}">All Books</a></li>
+                <li><a href="{{ url_for('home') }}?category=Self-Help">Self-Help</a></li>
+                <li><a href="{{ url_for('home') }}?category=Spirituality">Spirituality</a></li>
+                <li><a href="{{ url_for('home') }}?category=Mystery">Mystery</a></li>
+                <li><a href="{{ url_for('home') }}?category=Thriller">Thriller</a></li>
+                <li><a href="{{ url_for('home') }}?category=Romance">Romance</a></li>
+                <li><a href="{{ url_for('home') }}?category=Biography">Biography</a></li>
+                <li><a href="{{ url_for('home') }}?category=Fiction">Fiction</a></li>
+                <li><a href="{{ url_for('home') }}?category=Non-Fiction">Non-Fiction</a></li>
+                <li><a href="{{ url_for('home') }}?category=Philosophy">Philosophy</a></li>
+                <li><a href="{{ url_for('home') }}?category=Children">Children</a></li>
+                <li><a href="{{ url_for('home') }}?category=Business">Business</a></li>
+            </ul>
+
+            <button class="settings-btn" onclick="toggleSettingsPopup()">⚙️</button>
+
+<!-- Settings Popup -->
+            <div id="settings-popup" class="popup">
+                <div class="popup-content">
+                <span class="close-btn" onclick="toggleSettingsPopup()">&times;</span>
+                    <h3>Settings</h3>
+                         <ul>
+                            <li><a href="{{ url_for('cart') }}">Cart</a></li>
+                            <li><a href="{{ url_for('profile') }}">Profile Update</a></li>
+                            <li><a href="{{ url_for('addresses') }}">Addresses</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                            <li><a href="{{ url_for('subscriptions') }}">Subscriptions</a></li>
+                            <li><a href="#">Order History</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Books Section -->
+        <div class="books">
+            {% for book in books %}
+                <div class="book-item">
+                    <img src="{{ url_for('static', filename='Books png/' + book[5]) }}" alt="{{ book[1] }}">
+                    <h4>{{ book[1] }}</h4>
+                    <p>Price: ₹{{ book[4]|round(2) }}</p>
+                    <a href="{{ url_for('add_to_cart', book_id=book[0]) }}" class="add-to-cart-btn">Add to Cart</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<script>
+    window.addEventListener('load', function() {
+        adjustBarsPosition();
+    });
+
+    window.addEventListener('resize', function() {
+        adjustBarsPosition();
+    });
+
+    function adjustBarsPosition() {
+        const header = document.querySelector('.header-container');
+        const messageBar = document.querySelector('.message-container');
+        const categories = document.querySelector('.categories');
+
+        const headerHeight = header.offsetHeight; // Get the current height of the header
+        const messageBarHeight = messageBar.offsetHeight;
+
+        // Adjust the top positions based on the header height
+        messageBar.style.top = `${headerHeight}px`; // Position the message bar below the header
+        categories.style.top = `${headerHeight + messageBarHeight}px`; // Position categories below message bar
+    }
+</script>
+
+</body>
+</html>

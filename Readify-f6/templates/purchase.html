@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='pngtree-all-the-old-books-on-the-shelves-in-a-library-picture-image_2496728.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .purchase-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Payment options container */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fff;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .payment-option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .payment-option.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .phonepe-logo {
+            width: 40px;
+            height: auto;
+            margin-left: auto; /* Moves logo to the right */
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="purchase-container">
+    <h2>Enter Your Purchase Details</h2>
+    <form action="{{ url_for('purchase') }}" method="POST">
+        
+        <label for="country">Country:</label>
+        <select name="country" required>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Italy">Italy</option>
+            <option value="Spain">Spain</option>
+            <option value="Japan">Japan</option>
+            <option value="China">China</option>
+            <option value="Mexico">Mexico</option>
+            <option value="South Korea">South Korea</option>
+            <option value="Russia">Russia</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Belgium">Belgium</option>
+            <option value="New Zealand">New Zealand</option>
+        </select>
+
+        <label for="state">State:</label>
+        <input type="text" name="state" required>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" required>
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" name="pincode" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" name="phone" required>
+        
+        <label for="payment_method">Choose Payment Method:</label>
+        <div class="payment-options">
+            <div class="payment-option" onclick="selectPayment('PhonePe')">
+                PhonePe
+                <img src="{{ url_for('static', filename='pngwing.com.png') }}" alt="PhonePe" class="phonepe-logo">
+            </div>
+
+            <div class="payment-option" onclick="selectPayment('Pay on Delivery')">
+                Pay on Delivery
+            </div>
+        </div>
+
+        <input type="hidden" name="payment_method" id="payment_method" required>
+
+        <button type="submit">Confirm Purchase</button>
+    </form>
+</div>
+
+<script>
+    function selectPayment(method) {
+        // Remove "selected" class from all options
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+
+        // Add "selected" class to clicked option
+        event.currentTarget.classList.add('selected');
+
+        // Update hidden input field
+        document.getElementById('payment_method').value = method;
+    }
+</script>
+
+</body>
+</html>

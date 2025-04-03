@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The Luminary Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Light gradient background */
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(to right, #6a5acd, #483d8b); /* Gradient header */
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        main {
+            padding: 3em;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        section {
+            padding: 2em;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #483d8b;
+            margin-bottom: 1em;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0.5em;
+        }
+
+        section p {
+            line-height: 1.7;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background: #f8f8f8;
+            border-top: 1px solid #eee;
+        }
+
+        footer a {
+            color: #cd5a90;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        footer a:hover {
+            background-color: #521010;
+        }
+
+        .highlight {
+            color: #d2691e; /* Highlight color for emphasis */
+            font-weight: 500;
+        }
+
+        .quote {
+            font-style: roman;
+            color: #777;
+            margin-top: 1.5em;
+            border-left: 3px solid #6a5acd;
+            padding-left: 1em;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>READIFY</h1>
+    </header>
+
+    <main>
+        <section
+        >
+            <h2>A Beacon of Knowledge</h2>
+            <div class="image-container">
+            <img src="../static/logo-removebg-preview.png" alt="Library Books">
+            </div>
+            <p>Welcome to The Readify, a sanctuary for seekers of wisdom and lovers of stories. We believe that every book is a portal to another world, a chance to explore new ideas and perspectives. Our mission is to illuminate your mind with a curated collection of literature that inspires, educates, and entertains.</p>
+            <p>We are more than just a library; we are a community of passionate readers and lifelong learners. Our shelves hold not just books, but the collective dreams and knowledge of countless authors, ready to be discovered by you.</p>
+            <p class="quote">"Reading is a conversation. All books talk. But a good book listens as well." - Mark Haddon</p>
+        </section>
+
+        <section>
+            <h2>Our Story</h2>
+            <p>Founded by a pair of freinds named Adiya,Clavene who dreamed of creating a space where knowledge is celebrated, Readify was born from a simple desire: to share the transformative power of reading. We carefully select each book, ensuring that our collection is as diverse and enriching as the readers we serve.</p>
+            <p>From the timeless wisdom of ancient philosophy to the thrilling adventures of modern fiction, we strive to offer a literary landscape that caters to every taste. We believe in the power of stories to connect us, to challenge us, and to change us.</p>
+            <p>Join us on this journey of discovery, and let Readify be your guide to a world of endless possibilities.</p>
+            <p><span class="highlight">Explore. Discover. Enlighten.</span></p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="{{ url_for('home') }}">Return to the Main Shelf</a>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
